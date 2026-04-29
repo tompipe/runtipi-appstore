@@ -1,15 +1,14 @@
-version: '3.9'
 services:
   beszel-agent:
-    image: henrygd/beszel-agent:0.18.7
-    container_name: beszel-agent
-    restart: unless-stopped
-    network_mode: host
+    image: 'henrygd/beszel-agent:0.18.7'
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
     environment:
-      - PORT=45876
-      - KEY=${BESZEL_AGENT_KEY}
-    labels:
-      traefik.enable: false
-      runtipi.managed: true
+      - 'PORT=45876'
+      - 'KEY=${BESZEL_AGENT_KEY}'
+    network_mode: 'host'
+    x-runtipi:
+      internal_port: 45876
+      is_main: true
+x-runtipi:
+  schema_version: 2
